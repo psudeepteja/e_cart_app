@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addToCart } from "../../feature/slices/cartSlice";
+import { addToCart, decrement, increment } from "../../feature/slices/cartSlice";
 
 function Pdp() {
   const location = useLocation();
@@ -10,10 +10,18 @@ function Pdp() {
   const { cart } = useSelector((state) => state.cart)
 
   const cartItems = { ...location.state, quantity: 1 }
+  const exstingCartItem = cart.find(i => i.id === id)
+
+  const handleIncrement = (id) => {
+    dispatch(increment({ id, quantity: 1 }));
+  };
+
+  const handleDecrement = (id) => {
+    dispatch(decrement({ id, quantity: 1 }));
+  };
 
   const handleCart = () => {
-    const exstingItem = cart.find(i => i.id === id)
-    if (!exstingItem) {
+    if (!exstingCartItem) {
       dispatch(addToCart([cartItems]))
     }
   }
@@ -31,9 +39,15 @@ function Pdp() {
         <div className="py-2" >{description}</div>
         <div className="text-2xl font-bold py-2"> ₹ {price}</div>
         <div className="flex gap-4">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-md" onClick={handleCart}>
-            Add to Cart
-          </button>
+          {exstingCartItem ? (
+            <div className='grid grid-cols-3 gap-2 mt-2 justify-center items-center'>
+              <button onClick={() => handleDecrement(exstingCartItem.id)} className="border px-2 text-lg">-</button>
+              <div className="border px-4 text-lg">{exstingCartItem.quantity}</div>
+              <button onClick={() => handleIncrement(exstingCartItem.id)} className="border px-2 text-lg">+</button>
+            </div>
+          ) : (
+            <button className='px-4 py-2 rounded bg-blue-500 text-white' onClick={handleCart}>Add to Cart</button>
+          )}
           {cart.length > 0 &&
             <button className="px-4 py-2 bg-orange-500 text-white rounded-md" onClick={() => { handleGoToCart(id) }}>
               Go to Cart

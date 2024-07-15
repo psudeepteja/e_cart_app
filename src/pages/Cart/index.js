@@ -2,18 +2,23 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { orderItems } from "../../feature/slices/orderSlice";
-import { clearCart, decrement, increment } from "../../feature/slices/cartSlice";
+import { clearCart, decrement, increment, removeItem } from "../../feature/slices/cartSlice";
 
 const Cart = () => {
     const { cart } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const handleIncrement = (id) => {
+    const handleIncrement = (item) => {
+        const { id } = item
         dispatch(increment({ id, quantity: 1 }));
     };
 
-    const handleDecrement = (id) => {
+    const handleDecrement = (item) => {
+        const { id, quantity } = item
+        if (quantity <= 1) {
+            dispatch(removeItem(id));
+        }
         dispatch(decrement({ id, quantity: 1 }));
     };
 
@@ -44,14 +49,13 @@ const Cart = () => {
                                             <div>{item.title}</div>
                                             <div className="font-bold">
                                                 ₹ {item.price}
-
                                             </div>
                                         </div>
                                     </div>
                                     <div className="flex gap-2 items-center">
-                                        <button onClick={() => handleDecrement(item.id)} className="border px-2">-</button>
+                                        <button onClick={() => handleDecrement(item)} className="border px-2">-</button>
                                         <div className="border w-8 px-2">{item.quantity}</div>
-                                        <button onClick={() => handleIncrement(item.id)} className="border px-2">+</button>
+                                        <button onClick={() => handleIncrement(item)} className="border px-2">+</button>
                                     </div>
                                 </div>
                             ))}
