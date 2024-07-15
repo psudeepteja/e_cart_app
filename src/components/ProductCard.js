@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { addToCart, decrement, increment } from '../feature/slices/cartSlice';
 
 const ProductCard = ({ product, categoryId }) => {
-  console.log("product", product)
-
   const { title, image, price, id } = product
   const { cart } = useSelector((state) => state.cart)
   const dispatch = useDispatch();

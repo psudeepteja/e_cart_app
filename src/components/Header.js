@@ -5,6 +5,9 @@ import { MaterialSymbolsShoppingCart } from '../icons/cart'
 
 export default function Header() {
   const { cart } = useSelector((state) => state.cart);
+  const cartQtyItems = cart.map((i) => i.quantity)
+  const cartQty = cartQtyItems.reduce((acc, sum) => acc + sum, 0)
+
   const navigate = useNavigate()
 
   return (
@@ -14,7 +17,7 @@ export default function Header() {
         <div >
           <MaterialSymbolsShoppingCart />
         </div>
-        <div className='absolute top-[-17px] right-[5px] font-bold text-orange-600 text-lg'>{cart.length}</div>
+        <div className='absolute top-[-17px] right-[5px] font-bold text-orange-600 text-lg'>{cartQty}</div>
       </div>
     </div>
   )

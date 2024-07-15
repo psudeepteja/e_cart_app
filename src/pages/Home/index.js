@@ -13,8 +13,6 @@ const categoryImages = {
 
 export default function Home() {
   const { category } = useSelector(state => state.categories)
-  console.log("data", category)
-
   const dispatch = useDispatch()
 
   useEffect(() => {
