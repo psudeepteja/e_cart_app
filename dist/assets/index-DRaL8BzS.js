@@ -1,0 +1,1 @@
+import{m as s,j as r}from"./index-CXKPZ4x8.js";function t(){const e=s();return r.jsxs("div",{id:"error-page",children:[r.jsx("h1",{children:"Oops!"}),r.jsx("p",{children:"Sorry, an unexpected error has occurred."}),r.jsx("p",{children:r.jsx("i",{children:e.statusText||e.message})})]})}export{t as default};
