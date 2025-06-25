@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getCategoryApi } from '../asyncThunk'
 
 const initialState = {
-  category: []
+  category: [],
+  isLoading: "idle"
 }
 
 export const categorySlice = createSlice({
@@ -10,8 +11,15 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCategoryApi.fulfilled, (state, action) => {
+    builder.addCase(getCategoryApi.pending, (state, action) => {
+      state.isLoading = "pending";
+    })
+    .addCase(getCategoryApi.fulfilled, (state, action) => {
       state.category = action.payload;
+      state.isLoading = "idle";
+    })
+     .addCase(getCategoryApi.rejected, (state, action) => {
+      state.isLoading = "idle";
     })
   }
 })

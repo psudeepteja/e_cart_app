@@ -46,7 +46,7 @@ function Pdp() {
               <button onClick={() => handleIncrement(exstingCartItem.id)} className="border px-2 text-lg">+</button>
             </div>
           ) : (
-            <button className='px-4 py-2 rounded bg-blue-500 text-white' onClick={handleCart}>Add to Cart</button>
+            <button className='px-4 py-2 rounded bg-sky-900 text-white font-bold' onClick={handleCart}>Add to Cart</button>
           )}
           {cart.length > 0 &&
             <button className="px-4 py-2 bg-orange-500 text-white rounded-md" onClick={() => { handleGoToCart(id) }}>

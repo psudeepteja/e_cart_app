@@ -6,6 +6,7 @@ import categoriesReducer from '../feature/slices/categoriesSlice';
 import productReducer from '../feature/slices/productSlice';
 import cartReducer from '../feature/slices/cartSlice';
 import orderReducer from '../feature/slices/orderSlice';
+import homeProductReducer from '../feature/slices/homeProductsSlice'
 
 const persistConfig = {
 	key: "root",
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
 	product: productReducer,
 	cart: cartReducer,
 	order: orderReducer,
+	homeProduct: homeProductReducer
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -47,7 +47,7 @@ const ProductCard = ({ product, categoryId }) => {
           <button onClick={() => handleIncrement(exstingCartItem.id)} className="border px-2 text-lg">+</button>
         </div>
       ) : (
-        <button className='w-full py-2 rounded mt-2 bg-blue-500 text-white' onClick={handleCart}>Add to Cart</button>
+        <button className='w-full py-2 rounded mt-2 bg-sky-900 font-bold text-white' onClick={handleCart}>Add to Cart</button>
       )}
     </div>
   );

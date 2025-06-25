@@ -26,6 +26,10 @@ const Error = loadable(() =>
 	import(/* webpackChunkName: "Error", webpackPrefetch: true */ "../pages/Error")
 );
 
+const Auth = loadable(() =>
+	import(/* webpackChunkName: "Order", webpackPrefetch: true */ "../pages/Auth")
+);
+
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -51,6 +55,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/order-confirmation",
 				element: <Order />,
+			},
+			{
+				path: "/auth",
+				element: <Auth />,
 			},
 		],
 	},
