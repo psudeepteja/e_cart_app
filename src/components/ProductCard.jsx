@@ -31,7 +31,7 @@ const ProductCard = ({ product, categoryId }) => {
         navigate(`/products/category/${categoryId}/${product.id}`,
           { state: product })
       }}>
-        <img className="w-80 h-60" src={image} alt={title} />
+        <img className="w-40 h-40" src={image} alt={title} />
         <div className=" py-4">
           <div className="font-bold mb-2 truncate">{title}</div>
         </div>

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import loadable from "@loadable/component";
 import RootLayout from "../layout/RootLayout";
+import ProtectedRoutes from "./protectedRoutes";
 
 const Home = loadable(() =>
 	import(/* webpackChunkName: "Home", webpackPrefetch: true */ "../pages/Home")
@@ -38,23 +39,42 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <Home />,
+				element: (
+					<ProtectedRoutes>
+						<Home />
+					</ProtectedRoutes>),
+
 			},
 			{
 				path: "/products/category/:categoryId",
-				element: <Plp />,
+				element: (
+					<ProtectedRoutes>
+						<Plp />
+					</ProtectedRoutes>
+				),
 			},
 			{
 				path: "/products/category/:categoryId/:productId",
-				element: <Pdp />,
+				element: (
+					<ProtectedRoutes>
+						<Pdp />
+					</ProtectedRoutes>),
 			},
 			{
 				path: "/cart",
-				element: <Cart />,
+				element: (
+					<ProtectedRoutes>
+						<Cart />
+					</ProtectedRoutes>
+				),
 			},
 			{
 				path: "/order-confirmation",
-				element: <Order />,
+				element: (
+					<ProtectedRoutes>
+						<Order />
+					</ProtectedRoutes>
+				),
 			},
 			{
 				path: "/auth",

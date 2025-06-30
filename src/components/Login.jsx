@@ -1,9 +1,11 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 // import { useSnackbar } from 'notistack';
 
 
 export default function Login({ userData }) {
     //   const {enqueueSnackbar} = useSnackbar();
+    const navigate = useNavigate()
 
   const { handleChange, values, handleSubmit } = useFormik({
     initialValues: {
@@ -15,15 +17,16 @@ export default function Login({ userData }) {
       console.log("values", values)
         //   enqueueSnackbar("login sucessfull")
 
-      userData.findIndex((user) => {
-        if (user.username === values.userName && user.password === values.password) {
+        if (values.userName === "admin" && values.password === "admin") {
           console.log("login sucessfull")
-          // localStorage.setItem("login", JSON.stringify(values))
-          document.cookie = "userName"  + "=" +values.userName
-
-
+          sessionStorage.setItem("userName", values.userName )
+          navigate('/')
         } 
-      })
+        else {
+         console.log("login failed")
+          sessionStorage.setItem("userName", null )
+
+        }
     },
   });
 
