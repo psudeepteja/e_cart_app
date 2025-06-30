@@ -42,7 +42,7 @@ const ProductCard = ({ product, categoryId }) => {
   };
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 p-4 cursor-pointer">
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg m-4 p-4 cursor-pointer">
       <div onClick={() => {
         navigate(`/products/category/${categoryId}/${product.id}`,
           { state: product })
