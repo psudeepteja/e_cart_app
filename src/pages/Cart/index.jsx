@@ -76,7 +76,7 @@ const Cart = () => {
                                     <div>{calculateTotalPrice().toFixed(2)}</div>
                                 </div>
                             </div>
-                            <button className="bg-blue-500 text-white w-full px-4 py-2 mt-2" onClick={placeOrder}>Place Order</button>
+                            <button className="bg-sky-900 rounded-md font-medium text-white w-full px-4 py-2 mt-2" onClick={placeOrder}>Place Order</button>
                         </div>
                     </div>
                 </>

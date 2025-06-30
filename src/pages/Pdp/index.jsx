@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addToCart, decrement, increment } from "../../feature/slices/cartSlice";
+import { useCallback } from "react";
+import { closeSnackbar, useSnackbar } from "notistack";
 
 function Pdp() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const { title, description, image, price, id } = location.state
   const { cart } = useSelector((state) => state.cart)
 
@@ -20,11 +23,26 @@ function Pdp() {
     dispatch(decrement({ id, quantity: 1 }));
   };
 
-  const handleCart = () => {
+  const handleCart = useCallback(() => {
     if (!exstingCartItem) {
       dispatch(addToCart([cartItems]))
+      enqueueSnackbar('Item added to the cart', {
+        variant: 'default',
+        style: { backgroundColor: "#0c4a6e" },
+        action: (key) => (
+          <div className='flex gap-2 items-center justify-center'>
+            <button className='font-bold' onClick={() => navigate(`/cart`)}>
+              View cart
+            </button>
+            <button className='font-bold text-lg pb-1' onClick={() => closeSnackbar(key)}>
+              x
+            </button>
+          </div>
+        )
+      });
     }
-  }
+  }, [enqueueSnackbar, closeSnackbar]);
+
   const handleGoToCart = () => {
     navigate('/cart')
   }
@@ -49,7 +67,7 @@ function Pdp() {
             <button className='px-4 py-2 rounded bg-sky-900 text-white font-bold' onClick={handleCart}>Add to Cart</button>
           )}
           {cart.length > 0 &&
-            <button className="px-4 py-2 bg-orange-500 text-white rounded-md" onClick={() => { handleGoToCart(id) }}>
+            <button className="px-4 py-2 bg-sky-900 text-white font-medium rounded-md" onClick={() => { handleGoToCart(id) }}>
               Go to Cart
             </button>
           }

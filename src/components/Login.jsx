@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-// import { useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 
 
 export default function Login({ userData }) {
-    //   const {enqueueSnackbar} = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
     const navigate = useNavigate()
 
   const { handleChange, values, handleSubmit } = useFormik({
@@ -15,15 +15,16 @@ export default function Login({ userData }) {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       console.log("values", values)
-        //   enqueueSnackbar("login sucessfull")
 
         if (values.userName === "admin" && values.password === "admin") {
-          console.log("login sucessfull")
+          enqueueSnackbar("Login successfull", { variant: "success" });
+
           sessionStorage.setItem("userName", values.userName )
           navigate('/')
         } 
         else {
-         console.log("login failed")
+          enqueueSnackbar("ERR095: Login Failed", { variant: "error" });
+
           sessionStorage.setItem("userName", null )
 
         }
